@@ -9,8 +9,7 @@ const basicFetch = async (endpoint) => {
 
 const HomeList = {
     getHomeList: async () => {
-        return [
-            {
+        return [{
                 slug: 'originals',
                 title: 'Originais Netflix',
                 items: await basicFetch(`/discover/tv?with_network=123&language=pt-br&api_key=${API_KEY}`)
@@ -50,7 +49,26 @@ const HomeList = {
                 title: 'Documentários',
                 items: await basicFetch(`/discover/movie?with_genres=99&language=pt-br&api_key=${API_KEY}`)
             },
-        ]
+        ];
+    },
+    getMovieInfo: async (movieId, type) => {
+        let info = {};
+
+        if (movieId) {
+            switch (type) {
+                case 'movie':
+                    info = await basicFetch(`/movie/${movieId}?language=pt-br&api_key=${API_KEY}`);
+                break;
+                case 'tv':
+                    info = await basicFetch(`/tv/${movieId}?language=pt-br&api_key=${API_KEY}`);
+                break;
+                default:
+                    info = null;
+                break;
+            }
+        }
+
+        return info;
     }
 }
 

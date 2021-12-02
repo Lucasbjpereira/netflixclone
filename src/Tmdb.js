@@ -26,7 +26,7 @@ const HomeList = {
             },
             {
                 slug: 'action',
-                title: 'ação',
+                title: 'Ação',
                 items: await basicFetch(`/discover/movie?with_genres=28&language=pt-br&api_key=${API_KEY}`)
             },
             {
